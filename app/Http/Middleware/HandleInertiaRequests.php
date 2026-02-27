@@ -33,6 +33,8 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+                // This securely passes the user's Spatie roles to Vue
+                'roles' => $request->user() ? $request->user()->getRoleNames() : [],
             ],
         ];
     }

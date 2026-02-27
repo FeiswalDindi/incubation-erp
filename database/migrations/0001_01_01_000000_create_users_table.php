@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('google_id')->nullable()->unique(); // Added for Google SSO
+            $table->string('avatar')->nullable(); // To store the Google profile picture
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable(); // Made nullable since Google users won't have one
             $table->rememberToken();
             $table->timestamps();
         });
