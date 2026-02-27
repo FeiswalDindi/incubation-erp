@@ -27,14 +27,17 @@ class HandleInertiaRequests extends Middleware
      *
      * @return array<string, mixed>
      */
-    public function share(Request $request): array
+public function share(Request $request): array
     {
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
-                // This securely passes the user's Spatie roles to Vue
                 'roles' => $request->user() ? $request->user()->getRoleNames() : [],
+            ],
+            // NEW: Share session flash messages with Vue
+            'flash' => [
+                'message' => fn () => $request->session()->get('message')
             ],
         ];
     }

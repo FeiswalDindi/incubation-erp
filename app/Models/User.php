@@ -47,4 +47,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relationship to their Incubation Profile
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 }
